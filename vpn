@@ -1,0 +1,23 @@
+#server
+1、sudo vi /etc/pptpd.conf
+# (Recommended)
+localip 192.168.0.1
+remoteip 192.168.0.234-238,192.168.0.245
+2、vi /etc/ppp/chap-secrets 
+# client        server  secret                  IP addresses
+xxx            pptpd   test *
+3、dns解析
+vi /etc/ppp/pptpd-options
+#add
+ms-dns 8.8.8.8
+4、开启内核IP转发
+sudo vi /etc/sysctl.conf 
+# Uncomment the next line to enable packet forwarding for IPv4
+net.ipv4.ip_forward=1 #去掉注释
+5、执行 sudo sysctl -p 生效
+net.ipv4.ip_forward = 1
+6、设置nat转发表
+  sudo iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o ens4  -j MASQUERADE 
+7、配置客户端
+  pptpsetup   --create myvpn --server 40.0.0.111 --username openlab --password 123456 --encrypt --start
+  8、route -n
