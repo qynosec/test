@@ -21,3 +21,5 @@ net.ipv4.ip_forward = 1
 7、配置客户端
   pptpsetup   --create myvpn --server 40.0.0.111 --username openlab --password 123456 --encrypt --start
   8、route -n
+在/etc/ppp/peers目录下面，生成一个myvpn的文件，在/etc/ppp目录下面，用户名和密码会写在chap-secret文件中
+8、
